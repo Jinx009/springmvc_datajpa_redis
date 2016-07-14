@@ -1,0 +1,44 @@
+package com.code.entity.pro;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/**
+ * 项目标签
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name="web_project_flag")
+public class ProjectFlag extends CommenEntity{
+
+	private static final long serialVersionUID = -1113035066496223581L;
+	
+	private Long projectId;
+	
+	@OneToOne
+	@JoinColumn(name = "flag_id")
+	private Flag flag;
+
+	
+	
+	
+	
+	
+	public Long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+	public Flag getFlag() {
+		return flag;
+	}
+	public void setFlag(Flag flag) {
+		this.flag = flag;
+	}
+}

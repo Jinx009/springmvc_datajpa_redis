@@ -1,0 +1,64 @@
+package com.code.entity.bank;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.*;
+
+/**
+ * 通道key
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name = "web_channel_config")
+public class ChannelConfig extends CommenEntity{
+
+	private static final long serialVersionUID = 445430050026339604L;
+	
+	//通道id
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bid")
+	private SupportBank sb;
+	//web充值key
+	private String webRechargeKey;
+	//web提现key
+	private String webCashKey;
+	//微信充值key
+	private String wapRechargeKey;
+	//微信提现key
+	private String wapCashKey;
+	
+	
+	
+	
+	public SupportBank getSb() {
+		return sb;
+	}
+	public void setSb(SupportBank sb) {
+		this.sb = sb;
+	}
+	public String getWebRechargeKey() {
+		return webRechargeKey;
+	}
+	public void setWebRechargeKey(String webRechargeKey) {
+		this.webRechargeKey = webRechargeKey;
+	}
+	public String getWebCashKey() {
+		return webCashKey;
+	}
+	public void setWebCashKey(String webCashKey) {
+		this.webCashKey = webCashKey;
+	}
+	public String getWapRechargeKey() {
+		return wapRechargeKey;
+	}
+	public void setWapRechargeKey(String wapRechargeKey) {
+		this.wapRechargeKey = wapRechargeKey;
+	}
+	public String getWapCashKey() {
+		return wapCashKey;
+	}
+	public void setWapCashKey(String wapCashKey) {
+		this.wapCashKey = wapCashKey;
+	}
+}

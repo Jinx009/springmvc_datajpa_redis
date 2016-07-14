@@ -1,0 +1,61 @@
+package com.code.entity.bank;
+
+import com.code.entity.CommenEntity;
+import com.code.entity.user.User;
+
+import javax.persistence.*;
+
+/**
+ * 绑卡通道联合信息
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name = "web_channel_bank")
+public class ChannelBank extends CommenEntity{
+
+	private static final long serialVersionUID = -6859729191332977912L;
+
+	//用户
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	//通道
+	@OneToOne
+	@JoinColumn(name = "cid")
+	private Channel channel;
+	
+	//绑卡记录
+	@OneToOne
+	@JoinColumn(name = "bid")
+	private AccountBank accountBank;
+
+	//0:关闭 1：启用
+	private Integer status;
+
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Channel getChannel() {
+		return channel;
+	}
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+	public AccountBank getAccountBank() {
+		return accountBank;
+	}
+	public void setAccountBank(AccountBank accountBank) {
+		this.accountBank = accountBank;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+}

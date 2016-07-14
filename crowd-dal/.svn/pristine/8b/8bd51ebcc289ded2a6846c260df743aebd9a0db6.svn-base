@@ -1,0 +1,105 @@
+package com.code.entity.user;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+ * 用户信息
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name="web_userinfo")
+public class UserInfo extends CommenEntity{
+
+	private static final long serialVersionUID = -6329771103541105266L;
+
+	//头像照片
+	private String photoPic;
+	//性别
+	private Integer sex;
+	//出生日期
+	@Temporal(TemporalType.DATE)
+	@Column(name = "birth_day")
+	private Date birthDay;
+	//邮箱
+	private String email;
+	//手机号码
+	private String mobilePhone;
+	//用户id
+	private Long userId;
+	//身份证号码
+	private String idNum;
+	//合格投资人状态
+	private Integer investStatus;
+	//实名状态
+	private Integer nameStatus;
+	//绑卡状态
+	private Integer bankStatus;
+	
+	
+	
+	
+	public String getPhotoPic() {
+		return photoPic;
+	}
+	public void setPhotoPic(String photoPic) {
+		this.photoPic = photoPic;
+	}
+	public Integer getSex() {
+		return sex;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+	public Date getBirthDay() {
+		return birthDay;
+	}
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getIdNum() {
+		return idNum;
+	}
+	public void setIdNum(String idNum) {
+		this.idNum = idNum;
+	}
+	public Integer getInvestStatus() {
+		return investStatus;
+	}
+	public void setInvestStatus(Integer investStatus) {
+		this.investStatus = investStatus;
+	}
+	public Integer getNameStatus() {
+		return nameStatus;
+	}
+	public void setNameStatus(Integer nameStatus) {
+		this.nameStatus = nameStatus;
+	}
+	public Integer getBankStatus() {
+		return bankStatus;
+	}
+	public void setBankStatus(Integer bankStatus) {
+		this.bankStatus = bankStatus;
+	}
+}

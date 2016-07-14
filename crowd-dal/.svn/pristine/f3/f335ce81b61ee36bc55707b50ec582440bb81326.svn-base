@@ -1,0 +1,18 @@
+package com.code.dao.project;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+
+import com.code.entity.project.WebProjectAttention;
+
+
+public interface WebProjectAttentionDao extends PagingAndSortingRepository<WebProjectAttention,Long>,JpaSpecificationExecutor<WebProjectAttention> {
+
+	@Query(" select a from WebProjectAttention a where a.projectId =:id ")
+	public  List<WebProjectAttention> findByProjectId(@Param("id")long id);
+
+}

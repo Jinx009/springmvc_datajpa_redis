@@ -1,0 +1,169 @@
+package com.code.entity.bank;
+
+import com.code.entity.CommenEntity;
+import com.code.entity.user.User;
+
+import javax.persistence.*;
+
+/**
+ * 用户充值
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name = "web_account_recharge")
+public class AccountRecharge extends CommenEntity{
+	
+	private static final long serialVersionUID = 1L;
+	
+	// 充值类型：自动代扣充值 
+	public static final byte TYPE_AUTO_RECHARGE = 27;
+	//充值手续费承担方:2个人承担 
+    public static final byte FEE_BEAR_ALONE = 2;
+    // 充值手续费承担方:1平台垫付手续费 
+    public static final byte FEE_BEAR_COMPANY = 1;
+	
+	//订单号
+	private String tradeNo;
+	//用户
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
+	//状态 0等待审核 1充值成功 2充值失败 5处理中 6初审通过 7初审不通过
+	private int status;
+	//真实姓名
+	private String realName;
+	//银行卡号
+	private String bankNo;
+	//金额
+	private double money;
+	//充值入口（pc充值 微信 充值）
+	private String payment;
+	//回调信息
+	private String returnMsg;
+	//充值方式 1网上充值 2 网上支付 3线下充值 4后台线下充值 21银行充值 22线下充值奖励 23回款续投奖励 24调单充值 25活动奖励 26其他充值27自动代扣充值
+	private int type;
+	//备注
+	private String remark;
+	//手续费
+	private double fee;
+	//实际到账金额
+	private double amountIn;
+	//添加ip
+	private String addIp;
+	//充值手续费承担方:1平台垫付手续费，2个人承担
+	private byte rechargeFeeBear;
+	//充值通道key
+	private String channelKey;
+	//连连钱包支付单号
+	private String oid_paybill;
+	//证件号码
+	private String cardId;
+	
+	
+	
+	
+	
+	public String getTradeNo() {
+		return tradeNo;
+	}
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public String getBankNo() {
+		return bankNo;
+	}
+	public void setBankNo(String bankNo) {
+		this.bankNo = bankNo;
+	}
+	public double getMoney() {
+		return money;
+	}
+	public void setMoney(double money) {
+		this.money = money;
+	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
+	public String getReturnMsg() {
+		return returnMsg;
+	}
+	public void setReturnMsg(String returnMsg) {
+		this.returnMsg = returnMsg;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public double getFee() {
+		return fee;
+	}
+	public void setFee(double fee) {
+		this.fee = fee;
+	}
+	public double getAmountIn() {
+		return amountIn;
+	}
+	public void setAmountIn(double amountIn) {
+		this.amountIn = amountIn;
+	}
+	public String getAddIp() {
+		return addIp;
+	}
+	public void setAddIp(String addIp) {
+		this.addIp = addIp;
+	}
+	public byte getRechargeFeeBear() {
+		return rechargeFeeBear;
+	}
+	public void setRechargeFeeBear(byte rechargeFeeBear) {
+		this.rechargeFeeBear = rechargeFeeBear;
+	}
+	public String getChannelKey() {
+		return channelKey;
+	}
+	public void setChannelKey(String channelKey) {
+		this.channelKey = channelKey;
+	}
+	public String getOid_paybill() {
+		return oid_paybill;
+	}
+	public void setOid_paybill(String oid_paybill) {
+		this.oid_paybill = oid_paybill;
+	}
+	public String getCardId() {
+		return cardId;
+	}
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
+	}
+}

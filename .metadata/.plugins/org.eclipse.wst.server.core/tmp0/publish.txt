@@ -1,0 +1,6 @@
+#Tomcat publish data
+#Wed May 18 18:29:40 CST 2016
+org.eclipse.jst.j2ee.server\:crowd-common=WEB-INF/lib/crowd-common-1.0-SNAPSHOT.jar
+org.eclipse.jst.j2ee.server\:crowd-biz=WEB-INF/lib/crowd-biz-1.0-SNAPSHOT.jar
+org.eclipse.jst.j2ee.server\:crowd-dal=WEB-INF/lib/crowd-dal-1.0-SNAPSHOT.jar
+org.eclipse.jst.jee.server\:/binary\:/Users/jinx/.m2/repository/org/springframework/spring-web/4.0.5.RELEASE/spring-web-4.0.5.RELEASE.jar=WEB-INF/lib/spring-web-4.0.5.RELEASE.jar

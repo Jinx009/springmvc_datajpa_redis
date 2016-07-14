@@ -1,0 +1,62 @@
+package com.code.entity.home;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * 静态字段配置
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name="home_config")
+public class Config extends CommenEntity{
+
+	private static final long serialVersionUID = -4044210597220211377L;
+
+	//名称
+	private String name;
+	//code编码
+	private String code;
+	//取值
+	private String value;
+	//备注
+	private String remark;
+	//状态
+	private Integer status;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+}

@@ -1,0 +1,146 @@
+package com.code.service.pro;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.code.dao.project.WebProjectAttentionDao;
+import com.code.dao.project.WebProjectContractDao;
+import com.code.dao.project.WebProjectDao;
+import com.code.dao.project.WebProjectFlagDao;
+import com.code.dao.project.WebProjectLeaderDao;
+import com.code.dao.project.WebProjectMaterialsDao;
+import com.code.dao.project.WebProjectOrderDao;
+import com.code.dao.project.WebProjectProfitDao;
+import com.code.entity.project.WebProject;
+import com.code.entity.project.WebProjectAttention;
+import com.code.entity.project.WebProjectContract;
+import com.code.entity.project.WebProjectFlag;
+import com.code.entity.project.WebProjectLeader;
+import com.code.entity.project.WebProjectMaterials;
+import com.code.entity.project.WebProjectOrder;
+import com.code.entity.project.WebProjectProfit;
+import com.code.model.pro.ProjectCommentModel;
+import com.code.model.pro.ProjectModel;
+
+@Service
+public class WebProjectService {
+
+	@Autowired
+	private WebProjectDao webProjectDao;
+	@Autowired
+	private WebProjectProfitDao webProjectProfitDao;
+	@Autowired
+	private WebProjectMaterialsDao webProjectMaterialsDao;
+	@Autowired
+	private WebProjectOrderDao webProjectOrderDao;
+	@Autowired
+	private WebProjectFlagDao webProjectFlagDao;
+	@Autowired
+	private WebProjectContractDao webProjectContractDao;
+	@Autowired
+	private WebProjectLeaderDao webProjectLeaderDao;
+	@Autowired
+	private WebProjectAttentionDao webProjectAttentionDao;
+	@Autowired
+	private WebProjectCommentService webProjectCommentService;
+	
+	/**
+	 * 项目所有详情数据
+	 * @param id
+	 * @return
+	 */
+	public ProjectModel details(Long id,int profitsStatus,int materialsStatus,int leadersStatus,int ordersStatus,int flagsStatus,int contractsStatus,int commentsStatus){
+		ProjectModel projectModel = new ProjectModel();
+		List<WebProjectProfit> profits = null;
+		List<WebProjectMaterials> materials = null;
+		List<WebProjectOrder> orders = null;
+		List<WebProjectFlag> flags = null;
+		List<WebProjectContract> contracts = null;
+		List<WebProjectLeader> leaders = null;
+		List<ProjectCommentModel> comments = null;
+		//项目基础信息
+		WebProject webProject = webProjectDao.findOne(id);
+		//项目权益
+		if(1==profitsStatus)
+			profits = webProjectProfitDao.findByProjectId(id);
+		//项目素材
+		if(1==materialsStatus)
+			materials = webProjectMaterialsDao.findByProjectId(id);
+		//项目订单
+		if(1==ordersStatus)
+			orders = webProjectOrderDao.findByProjectId(id);
+		//项目标签
+		if(1==flagsStatus)
+			flags = webProjectFlagDao.findByProjectId(id);
+		//项目合同
+		if(1==contractsStatus)
+			contracts = webProjectContractDao.findByProjectId(id);
+		//项目领投人
+		if(1==leadersStatus)
+			leaders = webProjectLeaderDao.findByProjectId(id);
+		//评论信息
+		if(1==commentsStatus)
+			comments = webProjectCommentService.getByParentId(id);
+		
+		
+		List<WebProjectAttention> attentions = webProjectAttentionDao.findByProjectId(id);
+		if(null!=attentions&&!attentions.isEmpty())
+			projectModel.setAttentions(attentions.size());
+		else
+			projectModel.setAttentions(0);
+		
+		projectModel.setContracts(contracts);
+		projectModel.setFlags(flags);
+		projectModel.setLeaders(leaders);
+		projectModel.setMaterials(materials);
+		projectModel.setOrders(orders);
+		projectModel.setProfits(profits);
+		projectModel.setWebProject(webProject);
+		projectModel.setComments(comments);
+		
+		return projectModel;
+	}
+
+	/**
+	 * 首页产品信息
+	 * @return
+	 */
+	public List<WebProject> findIndex() {
+		return webProjectDao.findIndex();
+	}
+
+	/**
+	 * 通过平台和类别查找项目列表
+	 * @param type
+	 * @param site
+	 * @return
+	 */
+	public List<WebProject> findByTypeAndSite(int type, int site) {
+		if(0==type){
+			if(0==site)
+				return webProjectDao.findAllForPc();
+			else if(1==site)
+				return webProjectDao.findAllForWechat();
+			else
+				return webProjectDao.findAllForApp();
+		}else{
+			if(0==site)
+				return webProjectDao.findTypeForPc(type);
+			else if(1==site)
+				return webProjectDao.findTypeForWechat(type);
+			else
+				return webProjectDao.findTypeForApp(type);
+		}
+	}
+
+	/**
+	 * 保存项目
+	 * @param webProject
+	 */
+	public void save(WebProject webProject) {
+		webProjectDao.save(webProject);
+	}
+	
+}

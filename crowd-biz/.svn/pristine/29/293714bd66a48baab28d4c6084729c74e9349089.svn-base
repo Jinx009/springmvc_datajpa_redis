@@ -1,0 +1,27 @@
+package com.code.service.user;
+
+import com.code.dao.user.WebUserBankDao;
+import com.code.entity.user.WebUserBank;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+
+/**
+ * Created by BABAI HOLDINGS on 2016/5/23.
+ */
+@Service
+@Transactional(readOnly = true)
+public class WebUserBankService {
+
+    private WebUserBankDao webUserBankDao;
+
+    public WebUserBank save(WebUserBank webUserBank){
+        webUserBank.setLastUpdateDate(new Date());
+        return webUserBankDao.save(webUserBank);
+    }
+
+    public WebUserBank findById(long id){
+        return webUserBankDao.findOne(id);
+    }
+}

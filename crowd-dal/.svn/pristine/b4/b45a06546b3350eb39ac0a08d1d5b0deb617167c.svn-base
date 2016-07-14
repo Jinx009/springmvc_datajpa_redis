@@ -1,0 +1,61 @@
+package com.code.entity.pro;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * 投资规则
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name="web_invest_rule")
+public class InvestRule extends CommenEntity{
+
+	private static final long serialVersionUID = -1926707112163011002L;
+	//对应项目
+	private Long projectId;
+	//支持金额
+	private Double money;
+	//最大接受人数 0 代表无上限
+	private Integer maxInvestor;
+	//投资收益
+	private String profit;
+	//收益图片
+	private String picPath;
+	
+	
+	
+	public Long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+	public Double getMoney() {
+		return money;
+	}
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+	public Integer getMaxInvestor() {
+		return maxInvestor;
+	}
+	public void setMaxInvestor(Integer maxInvestor) {
+		this.maxInvestor = maxInvestor;
+	}
+	public String getProfit() {
+		return profit;
+	}
+	public void setProfit(String profit) {
+		this.profit = profit;
+	}
+	public String getPicPath() {
+		return picPath;
+	}
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
+}

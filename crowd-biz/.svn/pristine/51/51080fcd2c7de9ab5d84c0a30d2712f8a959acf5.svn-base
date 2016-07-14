@@ -1,0 +1,28 @@
+package com.code.service.pro;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.code.dao.project.WebProjectProfitDao;
+import com.code.entity.project.WebProjectProfit;
+
+@Service
+public class WebProjectProfitService {
+
+	@Autowired
+	private WebProjectProfitDao webProjectProfitDao;
+	
+	/**
+	 * 新建权益规则
+	 * @param webProjectProfit
+	 * @return
+	 */
+	public WebProjectProfit save(WebProjectProfit webProjectProfit){
+		webProjectProfit.setCreateDate(new Date());
+		webProjectProfit.setLastUpdateDate(new Date());
+		return webProjectProfitDao.save(webProjectProfit);
+	}
+	
+}

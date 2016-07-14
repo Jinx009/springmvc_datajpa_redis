@@ -1,0 +1,59 @@
+package com.code.entity.webuser;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.code.entity.CommenEntity;
+
+/**
+ * 
+ * @author 高雄辉
+ * @description 用户绑卡信息表
+ * @createtime 2016年5月11日下午2:22:26
+ */
+@Entity
+@Table(name="web_user_bank")
+public class WebUserBank extends CommenEntity {
+	/**
+	 * 用户id
+	 */
+	private long userId;
+	/**
+	 * 银行卡号
+	 */
+	private String card;
+	/**
+	 * 绑卡状态
+	 * 0:失败
+	 * 1:成功
+	 */
+	private int status;
+	/**
+	 * 银行信息id
+	 */
+	private long bankId;
+	/**
+	 * 绑定id
+	 */
+	private String bind_id;
+	/**
+	 * 通道id
+	 */
+	private long channelId;
+	/**
+	 * 省份id
+	 */
+	private long provinceId;
+	/**
+	 * 城市id
+	 */
+	private long cityId;
+	/**
+	 * 支行名称
+	 */
+	private String subBranch;
+	/**
+	 * 手机号码
+	 */
+	private String mobilePhone;
+}

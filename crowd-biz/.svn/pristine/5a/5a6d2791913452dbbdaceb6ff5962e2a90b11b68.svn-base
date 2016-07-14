@@ -1,0 +1,146 @@
+package com.code.service.user.impl;
+
+import com.code.dao.sys.WebChannelBankDao;
+import com.code.dao.sys.WebChannelDao;
+import com.code.dao.user.WebUserBankDao;
+import com.code.dao.user.WebUserDao;
+import com.code.dao.user.WebUserInfoDao;
+import com.code.dao.user.WebUserRechargeDao;
+import com.code.entity.sys.WebChannel;
+import com.code.entity.sys.WebChannelBank;
+import com.code.entity.user.WebUser;
+import com.code.entity.user.WebUserBank;
+import com.code.entity.user.WebUserInfo;
+import com.code.entity.user.WebUserRecharge;
+import com.code.service.user.WebUserRechargeService;
+import com.code.tool.StringUtils;
+import com.code.tool.pay.OrderUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+/**
+ * Created by 高雄辉 on 18/05/2016.11:22
+ *
+ * @description
+ */
+@Service
+public class WebUserRechargeServiceImpl implements WebUserRechargeService{
+
+    @Autowired
+    private WebUserRechargeDao webUserRechargeDao;
+    @Autowired
+    private WebUserBankDao webUserBankDao;
+    @Autowired
+    private WebUserInfoDao webUserInfoDao;
+    @Autowired
+    private WebChannelDao webChannelDao;
+    @Autowired
+    private WebChannelBankDao webChannelBankDao;
+
+    /**
+     * 检测通道ID是否存在
+     *
+     * @param channelId 通道ID
+     * @return
+     */
+    @Override
+    public boolean checkChannel(long channelId) {
+        return webChannelDao.exists(channelId);
+    }
+
+    /**
+     * 校验用户绑定卡是否与当前通道相符
+     *
+     * @param channelId  通道ID
+     * @param userBankId 用户绑定卡ID
+     * @return
+     */
+    @Override
+    public boolean checkUserBank(final long userId, final long channelId, final long userBankId) {
+     long count=webUserBankDao.count(new Specification<WebUserBank>() {
+            @Override
+            public Predicate toPredicate(Root<WebUserBank> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Predicate predicate_id=criteriaBuilder.equal(root.get("id"),userBankId);
+                Predicate predicate_userId=criteriaBuilder.equal(root.get("userId"),userId);
+                Predicate predicate_channelId=criteriaBuilder.equal(root.get("channelId"),channelId);
+                Predicate predicate_status=criteriaBuilder.equal(root.get("status"),1);
+                return criteriaBuilder.and(predicate_id,predicate_userId,predicate_channelId,predicate_status);
+            }
+        });
+        if(count==1){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 校验绑定卡是否支持以及是否卡号符合规则
+     *
+     * @param channelId 通道ID
+     * @param bankId    银行ID
+     * @param cardNo    卡号
+     * @return
+     */
+    @Override
+    public boolean checkChannelBank(final long channelId, final long bankId, String cardNo) {
+        long count=webChannelBankDao.count(new Specification<WebChannelBank>() {
+            @Override
+            public Predicate toPredicate(Root<WebChannelBank> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                Predicate predicate_channelId=criteriaBuilder.equal(root.get("channelId"),channelId);
+                Predicate predicate_bankId=criteriaBuilder.equal(root.get("bankId"),bankId);
+                return criteriaBuilder.and(predicate_channelId,predicate_bankId);
+            }
+        });
+        //校验银行卡号是否符合规则
+        if(count>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public WebUserRecharge createWebUserRecharge(WebUser webUser, double money, long channelId, long userBankId) {
+        WebUserRecharge webUserRecharge=new WebUserRecharge();
+        webUserRecharge.setUserId(webUser.getId());
+        //获取用户身份证号
+        WebUserInfo webUserInfo=webUserInfoDao.findByUserId(webUser.getId());
+        webUserRecharge.setIdCard(webUserInfo.getIdCard());
+        //设置充值状态
+        webUserRecharge.setStatus(0);
+        //设置充值类型  0:线上
+        webUserRecharge.setType(0);
+        //检测 设置通道ID
+        webUserRecharge.setChannelId(channelId);
+        //设置绑卡ID
+        webUserRecharge.setUserBankId(userBankId);
+        //设置充值金钱
+        webUserRecharge.setMoney(money);
+        //设置收费利率
+        webUserRecharge.setFee(0.00);
+        //设置真实变动金额
+        webUserRecharge.setRealMoney(money);
+        //设置订单号
+        webUserRecharge.setOrderId(OrderUtil.createOrderId());
+        webUserRechargeDao.save(webUserRecharge);
+        return webUserRecharge;
+    }
+
+    @Override
+    public WebUserRecharge createWebUserRecharge(WebUser webUser, double money, long channelId, String cardNo, long bankId) {
+        //添加绑卡信息
+        WebUserBank webUserBank=new WebUserBank();
+        webUserBank.setUserId(webUser.getId());
+        webUserBank.setBankId(bankId);
+        webUserBank.setCard(cardNo);
+        webUserBank.setStatus(0);
+        webUserBank.setChannelId(channelId);
+        webUserBankDao.save(webUserBank);
+        return createWebUserRecharge(webUser,money,channelId,webUserBank.getId());
+    }
+}

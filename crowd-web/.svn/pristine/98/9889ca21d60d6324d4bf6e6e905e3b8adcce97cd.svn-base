@@ -1,0 +1,153 @@
+package com.code.redis;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
+
+import com.code.entity.user.User;
+import com.code.tool.RedisKeyUtil;
+
+@Service
+public class RedisService {
+
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
+	@Autowired
+	private RedisTemplate<String,User> redisTemplate;
+	
+	/**
+	 * 压值
+	 * @param user
+	 * @return
+	 */
+	public String addUser(User user){
+		user = new User();
+		user.setId(2l);
+		user.setOpenId("xxxxxxx");
+		String key = RedisKeyUtil.getUUID(user.getId());
+		redisTemplate.opsForValue().set(key, user);
+		return key;
+	}
+	
+	/**
+	 * 取值
+	 * @param key
+	 * @return
+	 */
+	public User getUser(String key){
+		return redisTemplate.opsForValue().get(key);
+	}
+	
+	/** 
+     * 压栈 
+     *  
+     * @param key 
+     * @param value 
+     * @return 
+     */  
+    public Long push(Long userId) {  
+    	String key = RedisKeyUtil.getUUID(userId);
+    	System.out.println(key);
+        return stringRedisTemplate.opsForList().leftPush(key,String.valueOf(userId));  
+    }  
+  
+    /** 
+     * 出栈 
+     *  
+     * @param key 
+     * @return 
+     */  
+    public String pop(String key) {  
+        return stringRedisTemplate.opsForList().leftPop(key);  
+    }  
+  
+    /** 
+     * 入队 
+     *  
+     * @param key 
+     * @param value 
+     * @return 
+     */  
+    public Long in(String key, String value) {  
+        return stringRedisTemplate.opsForList().rightPush(key, value);  
+    }  
+  
+    /** 
+     * 出队 
+     *  
+     * @param key 
+     * @return 
+     */  
+    public String out(String key) {  
+        return stringRedisTemplate.opsForList().leftPop(key);  
+    }  
+  
+    /** 
+     * 栈/队列长 
+     *  
+     * @param key 
+     * @return 
+     */  
+    public Long length(String key) {  
+        return stringRedisTemplate.opsForList().size(key);  
+    }  
+  
+    /** 
+     * 范围检索 
+     *  
+     * @param key 
+     * @param start 
+     * @param end 
+     * @return 
+     */  
+    public List<String> range(String key, int start, int end) {  
+        return stringRedisTemplate.opsForList().range(key, start, end);  
+    }  
+  
+    /** 
+     * 移除 
+     *  
+     * @param key 
+     * @param i 
+     * @param value 
+     */  
+    public void remove(String key, long i, String value) {  
+    	stringRedisTemplate.opsForList().remove(key, i, value);  
+    }  
+  
+    /** 
+     * 检索 
+     *  
+     * @param key 
+     * @param index 
+     * @return 
+     */  
+    public String index(String key, long index) {  
+        return stringRedisTemplate.opsForList().index(key, index);  
+    }  
+  
+    /** 
+     * 置值 
+     *  
+     * @param key 
+     * @param index 
+     * @param value 
+     */  
+    public void set(String key, long index, String value) {  
+    	stringRedisTemplate.opsForList().set(key, index, value);  
+    }  
+  
+    /** 
+     * 裁剪 
+     *  
+     * @param key 
+     * @param start 
+     * @param end 
+     */  
+    public void trim(String key, long start, int end) {  
+    	stringRedisTemplate.opsForList().trim(key, start, end);  
+    }  
+}

@@ -1,0 +1,143 @@
+package com.code.entity.webuser;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.code.entity.CommenEntity;
+
+/**
+ * 
+ * @author 高雄辉
+ * @description 用户信息表
+ * @createtime 2016年5月11日下午2:46:40
+ */
+@Entity
+@Table(name="web_user_information")
+public class WebUserInformation extends CommenEntity {
+	/**
+	 * 用户id
+	 */
+	private long userId;
+	/**
+	 * 真实姓名
+	 */
+	private String realName;
+	/**
+	 * 用户昵称
+	 */
+	private String nickName;
+	/**
+	 * 用户住址
+	 */
+	private String address;
+	/**
+	 * 用户头像地址
+	 */
+	private String headPicPath;
+	/**
+	 * 省份id
+	 */
+	private long provinceId;
+	/**
+	 * 城市id
+	 */
+	private long cityId;
+	/**
+	 * 身份证号码
+	 */
+	private String idCard;
+	/**
+	 * 身份证正面照
+	 */
+	private String cardPositivePath;
+	/**
+	 * 身份证反面照
+	 */
+	private String cardOpposite;
+	/**
+	 * 出生日期
+	 */
+	private Date birthDay;
+	/**
+	 * 姓名
+	 * 0:男
+	 * 1:女
+	 */
+	private int sex;
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getHeadPicPath() {
+		return headPicPath;
+	}
+	public void setHeadPicPath(String headPicPath) {
+		this.headPicPath = headPicPath;
+	}
+	public long getProvinceId() {
+		return provinceId;
+	}
+	public void setProvinceId(long provinceId) {
+		this.provinceId = provinceId;
+	}
+	public long getCityId() {
+		return cityId;
+	}
+	public void setCityId(long cityId) {
+		this.cityId = cityId;
+	}
+	public String getIdCard() {
+		return idCard;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
+	public String getCardPositivePath() {
+		return cardPositivePath;
+	}
+	public void setCardPositivePath(String cardPositivePath) {
+		this.cardPositivePath = cardPositivePath;
+	}
+	public String getCardOpposite() {
+		return cardOpposite;
+	}
+	public void setCardOpposite(String cardOpposite) {
+		this.cardOpposite = cardOpposite;
+	}
+	public Date getBirthDay() {
+		return birthDay;
+	}
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+	
+	
+}

@@ -1,0 +1,44 @@
+package com.code.service.pro;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.code.dao.project.WebProjectMaterialsDao;
+import com.code.entity.project.WebProjectMaterials;
+
+@Service
+public class WebProjectMaterialsService {
+   
+	@Autowired
+	private WebProjectMaterialsDao webProjectMaterialsDao;
+	
+	/**
+	 * 新建素材
+	 * @param webProjectMaterials
+	 * @return
+	 */
+	public WebProjectMaterials save(WebProjectMaterials webProjectMaterials){
+		webProjectMaterials.setCreateDate(new Date());
+		webProjectMaterials.setLastUpdateDate(new Date());
+		webProjectMaterials.setStatus(1);
+		return webProjectMaterialsDao.save(webProjectMaterials);
+	}
+
+	/**
+	 * 获取banner
+	 * @param i
+	 * @return
+	 */
+	public List<WebProjectMaterials> getBanner(int type) {
+		if(1==type)
+			return webProjectMaterialsDao.getBanner("pc_banner");
+		else if(2==type)
+			return webProjectMaterialsDao.getBanner("wechat_banner");
+		else
+			return webProjectMaterialsDao.getBanner("app_banner");
+	}
+	
+}

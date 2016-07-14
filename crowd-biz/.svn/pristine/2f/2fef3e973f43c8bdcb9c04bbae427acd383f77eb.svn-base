@@ -1,0 +1,23 @@
+package com.code.service.home;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.code.dao.home.HomeConfigDao;
+import com.code.entity.home.Config;
+
+@Service("homeConfigService")
+@Transactional(readOnly=false)
+public class HomeConfigService {
+
+	@Autowired
+	private HomeConfigDao homeConfigDao;
+	
+	public List<Config> findUsed(Integer status){
+		return homeConfigDao.findUsed(status);
+	}
+	
+}

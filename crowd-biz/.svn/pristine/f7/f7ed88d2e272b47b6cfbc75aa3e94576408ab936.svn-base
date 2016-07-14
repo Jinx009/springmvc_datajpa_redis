@@ -1,0 +1,33 @@
+package com.code.service.user;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.code.dao.user.WebUserAccountDao;
+import com.code.entity.user.WebUserAccount;
+
+@Service
+@Transactional(readOnly = true)
+public class WebUserAccountService {
+
+	@Autowired
+	private WebUserAccountDao webUserAccountDao;
+	
+	/**
+	 * 新建用户账户中心
+	 * @param webUserAccount
+	 * @return
+	 */
+	public WebUserAccount save(WebUserAccount webUserAccount){
+		webUserAccount.setCreateDate(new Date());
+		webUserAccount.setInvestMoney(0);
+		webUserAccount.setUseMoney(0);
+		webUserAccount.setLastUpdateDate(new Date());
+		webUserAccount.setFrozenMoney(0);
+		return webUserAccountDao.save(webUserAccount);
+	}
+	
+}

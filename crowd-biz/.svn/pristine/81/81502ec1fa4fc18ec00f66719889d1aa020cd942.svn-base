@@ -1,0 +1,100 @@
+package com.code.model.pro;
+
+import java.util.List;
+
+import com.code.entity.project.WebProject;
+import com.code.entity.project.WebProjectContract;
+import com.code.entity.project.WebProjectFlag;
+import com.code.entity.project.WebProjectLeader;
+import com.code.entity.project.WebProjectMaterials;
+import com.code.entity.project.WebProjectOrder;
+import com.code.entity.project.WebProjectProfit;
+
+/**
+ * 项目数据模型
+ * @author Jinx
+ *
+ */
+public class ProjectModel {
+
+	//项目基本信息
+	private WebProject webProject;
+	//项目权益列表
+	private List<WebProjectProfit> profits;
+	//项目标签
+	private List<WebProjectFlag> flags;
+	//项目合同
+	private List<WebProjectContract> contracts;
+	//项目素材
+	private List<WebProjectMaterials> materials;
+	//项目订单
+	private List<WebProjectOrder> orders;
+	//项目领投人
+	private List<WebProjectLeader> leaders;
+	//项目评论
+	private List<ProjectCommentModel> comments;
+	//关注者人数
+	private int attentions;
+	
+	
+	
+	
+	
+	
+	
+	public WebProject getWebProject() {
+		return webProject;
+	}
+	public void setWebProject(WebProject webProject) {
+		this.webProject = webProject;
+	}
+	public List<WebProjectProfit> getProfits() {
+		return profits;
+	}
+	public void setProfits(List<WebProjectProfit> profits) {
+		this.profits = profits;
+	}
+	public List<WebProjectFlag> getFlags() {
+		return flags;
+	}
+	public void setFlags(List<WebProjectFlag> flags) {
+		this.flags = flags;
+	}
+	public List<WebProjectContract> getContracts() {
+		return contracts;
+	}
+	public void setContracts(List<WebProjectContract> contracts) {
+		this.contracts = contracts;
+	}
+	public List<WebProjectMaterials> getMaterials() {
+		return materials;
+	}
+	public void setMaterials(List<WebProjectMaterials> materials) {
+		this.materials = materials;
+	}
+	public List<WebProjectOrder> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<WebProjectOrder> orders) {
+		this.orders = orders;
+	}
+	public List<WebProjectLeader> getLeaders() {
+		return leaders;
+	}
+	public void setLeaders(List<WebProjectLeader> leaders) {
+		this.leaders = leaders;
+	}
+	public int getAttentions() {
+		return attentions;
+	}
+	public void setAttentions(int attentions) {
+		this.attentions = attentions;
+	}
+	public List<ProjectCommentModel> getComments() {
+		return comments;
+	}
+	public void setComments(List<ProjectCommentModel> comments) {
+		this.comments = comments;
+	}
+	
+}

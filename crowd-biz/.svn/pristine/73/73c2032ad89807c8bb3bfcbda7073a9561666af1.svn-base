@@ -1,0 +1,58 @@
+package com.code.service.user;
+
+import com.code.entity.user.WebUser;
+import com.code.entity.user.WebUserRecharge;
+
+/**
+ * Created by 高雄辉 on 18/05/2016.11:21
+ *
+ * @description 用户充值记录
+ */
+public interface WebUserRechargeService {
+
+    /**
+     * 检测通道ID是否存在
+     * @param channelId 通道ID
+     * @return
+     */
+    public boolean checkChannel(long channelId);
+
+
+    /**
+     * 校验用户绑定卡是否与当前通道相符
+     * @param channelId 通道ID
+     * @param userBankId 用户绑定卡ID
+     * @return
+     */
+    public boolean checkUserBank(long userId,long channelId,long userBankId);
+
+    /**
+     * 校验绑定卡是否支持以及是否卡号符合规则
+     * @param channelId 通道ID
+     * @param bankId  银行ID
+     * @param cardNo 卡号
+     * @return
+     */
+    public boolean  checkChannelBank(long channelId,long bankId,String cardNo );
+    /**
+     * 已绑卡充值
+     *
+     * @param webUser
+     * @param money
+     * @param channelId
+     * @param userBankId
+     * @return
+     */
+    public WebUserRecharge createWebUserRecharge(WebUser webUser,double money,long channelId,long userBankId);
+
+    /**
+     * 首次绑卡充值
+     * @param webUser
+     * @param money
+     * @param channelId
+     * @param cardNo
+     * @param bankId
+     * @return
+     */
+    public WebUserRecharge createWebUserRecharge(WebUser webUser,double money,long channelId,String cardNo,long bankId);
+}

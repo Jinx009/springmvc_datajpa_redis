@@ -1,0 +1,35 @@
+package com.code.controller.sys;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.code.constants.Constants;
+import com.code.entity.sys.WebFlag;
+import com.code.service.sys.WebFlagService;
+import com.code.tool.api.ApiResult;
+import com.code.tool.controller.BaseController;
+
+@Controller
+@RequestMapping("api/flag")
+public class WebFlagController extends BaseController{
+
+	@Autowired
+	private WebFlagService webFlagService;
+	
+	/**
+	 * 新建标签仓库
+	 * @param webFlag
+	 * @return
+	 */
+	@RequestMapping(value = "save",method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult save(@RequestBody WebFlag webFlag){
+		webFlagService.save(webFlag);
+		return new ApiResult(true,0,Constants.FLAG_DESC);
+	}
+	
+}

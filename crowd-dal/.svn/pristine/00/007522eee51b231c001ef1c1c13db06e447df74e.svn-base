@@ -1,0 +1,48 @@
+package com.code.entity.account;
+
+import com.code.entity.CommenEntity;
+import com.code.entity.user.User;
+
+import javax.persistence.*;
+
+/**
+ * 账户中心
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name = "web_account")
+public class Account extends CommenEntity{
+
+	private static final long serialVersionUID = -8023305148931193416L;
+
+	//用户信息
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
+	//可用金额
+	private Double useMoney;
+	//投资金额
+	private Double investMoney;
+	
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Double getUseMoney() {
+		return useMoney;
+	}
+	public void setUseMoney(Double useMoney) {
+		this.useMoney = useMoney;
+	}
+	public Double getInvestMoney() {
+		return investMoney;
+	}
+	public void setInvestMoney(Double investMoney) {
+		this.investMoney = investMoney;
+	}
+}

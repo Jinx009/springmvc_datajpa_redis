@@ -1,0 +1,88 @@
+package com.code.entity.user;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * 前端用户
+ * @author Jinx
+ *
+ */
+@Entity
+@Table(name="web_user")
+public class User extends CommenEntity{
+
+	private static final long serialVersionUID = -8226421579644805800L;
+	
+	//登录名
+	private String userName;
+	//密码
+	private String password;
+	//交易密码
+	private String payPwd;
+	//微信openId
+	private String openId;
+	//微信appId
+	private String appId;
+	//账号状态
+	private Integer loginStatus;
+	//登陆次数
+	private Integer loginTimes;
+	//用户来源
+	private String fromSite;
+	
+	
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPayPwd() {
+		return payPwd;
+	}
+	public void setPayPwd(String payPwd) {
+		this.payPwd = payPwd;
+	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+	public String getAppId() {
+		return appId;
+	}
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+	public Integer getLoginStatus() {
+		return loginStatus;
+	}
+	public void setLoginStatus(Integer loginStatus) {
+		this.loginStatus = loginStatus;
+	}
+	public Integer getLoginTimes() {
+		return loginTimes;
+	}
+	public void setLoginTimes(Integer loginTimes) {
+		this.loginTimes = loginTimes;
+	}
+	public String getFromSite() {
+		return fromSite;
+	}
+	public void setFromSite(String fromSite) {
+		this.fromSite = fromSite;
+	}
+	
+}

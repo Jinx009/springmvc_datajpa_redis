@@ -1,0 +1,89 @@
+package com.code.entity.webuser;
+
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+
+import org.hibernate.annotations.Table;
+
+import com.code.entity.CommenEntity;
+
+
+/**
+ * 
+ * @author 高雄辉
+ * @description 用户表
+ *
+ */
+@Entity(name="web_user")
+@Table(comment="用户表",appliesTo="web_user")
+public class WebUser extends CommenEntity {
+	
+	/**
+	 * 登录用户名
+	 */
+	private String userName;
+	/**
+	 * 登录密码
+	 */
+	private String pwd;
+	/**
+	 * 支付密码
+	 */
+	private String payPwd;
+	/**
+	 * 注册来源
+	 */
+	private int registerSite;
+	/**
+	 * 邀请码
+	 */
+	private String inviteCode;
+	/**
+	 * 注册邀请码
+	 */
+	private String registerCode;
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	public String getPayPwd() {
+		return payPwd;
+	}
+	public void setPayPwd(String payPwd) {
+		this.payPwd = payPwd;
+	}
+	public int getRegisterSite() {
+		return registerSite;
+	}
+	public void setRegisterSite(int registerSite) {
+		this.registerSite = registerSite;
+	}
+	public String getInviteCode() {
+		return inviteCode;
+	}
+	public void setInviteCode(String inviteCode) {
+		this.inviteCode = inviteCode;
+	}
+	public String getRegisterCode() {
+		return registerCode;
+	}
+	public void setRegisterCode(String registerCode) {
+		this.registerCode = registerCode;
+	}
+	
+	
+
+}

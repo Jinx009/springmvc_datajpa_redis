@@ -1,0 +1,30 @@
+package com.code.service.pro;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.code.dao.project.WebProjectLeaderDao;
+import com.code.entity.project.WebProjectLeader;
+import com.code.entity.user.WebUser;
+
+@Service
+public class WebProjectLeaderService {
+
+	@Autowired
+	private WebProjectLeaderDao webProjectLeaderDao;
+	
+	/**
+	 * 新申请项目领投人
+	 * @param webUser
+	 * @param webProjectLeader
+	 */
+	public void save(WebUser webUser,WebProjectLeader webProjectLeader){
+		webProjectLeader.setCreateDate(new Date());
+		webProjectLeader.setLastUpdateDate(new Date());
+		webProjectLeader.setStatus(0);
+		webProjectLeaderDao.save(webProjectLeader);
+	}
+	
+}

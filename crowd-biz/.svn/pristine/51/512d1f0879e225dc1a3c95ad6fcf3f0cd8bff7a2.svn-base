@@ -1,0 +1,24 @@
+package com.code.service.home;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.code.dao.home.HomeConfigDao;
+import com.code.entity.sys.HomeConfig;
+
+@Service("homeConfigService")
+@Transactional(readOnly = true)
+public class HomeConfigService {
+	
+	@Autowired
+	private HomeConfigDao homeConfigDao;
+	
+	@Transactional(readOnly = false)
+	public List<HomeConfig> findAll(){
+		return (List<HomeConfig>) homeConfigDao.findAll();
+	}
+	
+}

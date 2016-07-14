@@ -1,0 +1,10 @@
+package com.code.dao.home;
+
+import com.code.entity.home.Admin;
+
+public interface AdminDao{
+	
+	public Admin doLogin(String loginName, String password);
+	
+	public Admin save(Admin admin);
+}

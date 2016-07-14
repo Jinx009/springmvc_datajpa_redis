@@ -1,0 +1,49 @@
+package com.code.entity.bank;
+
+import com.code.entity.CommenEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="web_channel")
+public class Channel extends CommenEntity{
+
+	private static final long serialVersionUID = -6859904657821468346L;
+
+	//支付通道key
+	private String channelKey;
+	//支付通道名称
+	private String channelName;
+	//通道logo
+	private String channelLogo;
+	//通道费率
+	private Double channelRate;
+	
+	
+	
+	public String getChannelKey() {
+		return channelKey;
+	}
+	public void setChannelKey(String channelKey) {
+		this.channelKey = channelKey;
+	}
+	public String getChannelName() {
+		return channelName;
+	}
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
+	}
+	public String getChannelLogo() {
+		return channelLogo;
+	}
+	public void setChannelLogo(String channelLogo) {
+		this.channelLogo = channelLogo;
+	}
+	public Double getChannelRate() {
+		return channelRate;
+	}
+	public void setChannelRate(Double channelRate) {
+		this.channelRate = channelRate;
+	}
+}
