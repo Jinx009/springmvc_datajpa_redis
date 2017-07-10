@@ -1,0 +1,4 @@
+# springmvc_datajpa_redis
+SpringMVC_SpringDataJPA+Redis
+
+SpringMVC,SpringDataJPA,Redis集成
